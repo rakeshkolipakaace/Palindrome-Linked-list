@@ -12,6 +12,6 @@ public:
     bool isPalindrome(ListNode* head) {
         
         
-        return false;
+        return false; // Placeholder
     }
 };
