@@ -1,64 +1,69 @@
-#include <iostream>
-#include <vector>
-#include "../solutions/solution.cpp" // Make sure this path points to your solution file
+import sys
+import os
 
-using namespace std;
+# Ensure Python finds the 'solutions' folder where solution.py is located
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'solutions')))
 
-// Helper function to create a linked list from a vector
-ListNode* createLinkedList(const vector<int>& vals) {
-    ListNode dummy;
-    ListNode* current = &dummy;
-    for (int val : vals) {
-        current->next = new ListNode(val);
-        current = current->next;
-    }
-    return dummy.next;
-}
+from solution import Solution, ListNode
 
-// Helper function to print a vector
-void printVector(const vector<int>& vec) {
-    cout << "[";
-    for (size_t i = 0; i < vec.size(); ++i) {
-        cout << vec[i];
-        if (i < vec.size() - 1) cout << ",";
-    }
-    cout << "]";
-}
+def build_linked_list(arr):
+    if not arr:
+        return None
+    head = ListNode(arr[0])
+    current = head
+    for val in arr[1:]:
+        current.next = ListNode(val)
+        current = current.next
+    return head
 
-// Helper function to test one case
-bool test(const vector<int>& input, bool expected) {
-    Solution solution;
-    ListNode* head = createLinkedList(input);
-    bool result = solution.isPalindrome(head);
+def test_case(arr, expected):
+    head = build_linked_list(arr)
+    sol = Solution()
+    result = sol.isPalindrome(head)
+    print(f"Input: {arr}")
+    print(f"Output: {result}")
+    print(f"Expected: {expected}")
+    if result == expected:
+        print("✅ Test Passed!")
+        return True
+    else:
+        print("❌ Test Failed!")
+        return False
 
-    cout << "Input: ";
-    printVector(input);
-    cout << "\nOutput: " << (result ? "true" : "false") << endl;
-    cout << "Expected: " << (expected ? "true" : "false") << endl;
+if __name__ == "__main__":
+    test_cases = [
+        ([1,2,2,1], True),
+        ([1,2], False),
+        ([1], True),
+        ([], True),
+        ([1,2,3,2,1], True),
+        ([1,2,3,3,2,1], True),
+        ([1,2,3,4,2,1], False),
 
-    bool passed = (result == expected);
-    cout << (passed ? "✅ Test Passed!" : "❌ Test Failed!") << endl;
-    cout << "---------------------------------------------" << endl;
-    return passed;
-}
+        # Additional test cases
+        ([1,1,1,1,1], True),            # all same elements
+        ([1,2,3,4,3,2,1], True),        # odd length palindrome
+        ([1,2,3,4,5,2,1], False),       # odd length non-palindrome
+        ([1,0,1], True),                # palindrome with zero
+        ([1,0,0,1], True),              # even length palindrome with zeros
+        ([1,2,3,4,5,6,7,8,9,10], False), # strictly increasing, not palindrome
+        ([1,2,3,4,3,2,2], False),       # almost palindrome but last element breaks it
+        ([9,9,9,9,9,9,9,9], True),     # even length all same digits
+        ([1,2,3,2,1,0], False),         # palindrome + extra element at end
+        ([0], True),                    # single zero element
+    ]
 
-// Main test runner
-int main() {
-    bool all_passed = true;
+    passed = 0
+    failed = 0
 
-    all_passed &= test({1, 2, 2, 1}, true);      // Palindrome
-    all_passed &= test({1, 2}, false);           // Not palindrome
-    all_passed &= test({1}, true);               // Single node
-    all_passed &= test({}, true);                // Empty list is considered palindrome
-    all_passed &= test({1, 2, 3, 2, 1}, true);    // Odd length palindrome
-    all_passed &= test({1, 2, 3, 3, 2, 1}, true); // Even length palindrome
-    all_passed &= test({1, 2, 3, 4, 2, 1}, false);// Not palindrome
+    for arr, expected in test_cases:
+        if test_case(arr, expected):
+            passed += 1
+        else:
+            failed += 1
+        print("-" * 40)
 
-    if (all_passed) {
-        cout << "🎉 All test cases passed successfully! 🎉" << endl;
-    } else {
-        cout << "❌ Some test cases failed. Please check the failed cases!" << endl;
-    }
-
-    return 0;
-}
+    print(f"\nSummary:")
+    print(f"Total Test Cases: {len(test_cases)}")
+    print(f"Passed: {passed}")
+    print(f"Failed: {failed}")
