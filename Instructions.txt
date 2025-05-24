@@ -1,0 +1,76 @@
+Automation of git commit and push
+
+CPP (C++) 
+
+git add solutions/solution.cpp tests/test.cpp
+git commit -m "Cpp Solution"
+git push origin main
+
+
+
+PYTHON
+
+ git add solutions/solution.py tests/test.py
+ git commit -m "py Solution"
+ git push origin main
+
+
+C
+
+
+git add solutions/solution.c tests/test.c
+git commit -m "C Solution"
+git push origin main
+ 
+
+
+JAVA 
+
+git add solutions/Solution.java tests/Test.java
+git commit -m "java Solution"
+git push orign main
+
+
+ 
+===========================================================================================
+
+
+
+Local run commands
+
+go inside the tests folder and run the command for C and C++
+
+
+CPP (C++)
+
+cd ..\tests
+g++ test.cpp -o test
+.\test
+
+
+
+C 
+
+cd ..          
+cd tests       
+
+gcc test.c -o test
+.\test
+
+
+
+PYTHON
+
+for python run the commad from the root directory dont run on the tests folder
+
+python tests/test.py
+
+
+
+JAVA 
+
+for click run button  in vs code 
+
+
+
+
