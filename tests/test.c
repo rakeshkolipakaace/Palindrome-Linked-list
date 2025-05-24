@@ -1,20 +1,19 @@
-// tests/test.c
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include "../solutions/solution.c"  // Include the actual reverseList function
 
+// Forward declaration (no need to redefine struct here)
+struct ListNode;
 
-// Declare ListNode struct (must be consistent with solution.c)
+bool isPalindrome(struct ListNode* head);
+
+// Helper functions:
+
 struct ListNode {
     int val;
     struct ListNode *next;
 };
 
-// Declare the solution function from solution.c
-bool isPalindrome(struct ListNode* head);
-
-// Helper functions:
 struct ListNode* createNode(int val) {
     struct ListNode* node = (struct ListNode*) malloc(sizeof(struct ListNode));
     node->val = val;
