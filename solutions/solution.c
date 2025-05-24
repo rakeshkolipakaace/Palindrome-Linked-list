@@ -1,4 +1,3 @@
-// solutions/solution.c
 #include <stdbool.h>
 #include <stdlib.h>
 
@@ -32,5 +31,5 @@ bool isPalindrome(struct ListNode* head) {
         left = left->next;
         right = right->next;
     }
-    return true;// write your code here
+    return true;
 }
