@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "../solutions/solution.c"  // Include the actual reverseList function
+
 
 // Declare ListNode and isPalindrome (defined in solution.c)
 struct ListNode {
