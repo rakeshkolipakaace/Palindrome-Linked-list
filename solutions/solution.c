@@ -1,35 +1,26 @@
 #include <stdbool.h>
-#include <stdlib.h>
 
+// Definition for singly-linked list
 struct ListNode {
     int val;
     struct ListNode *next;
 };
 
-bool isPalindrome(struct ListNode* head) {
-    if (!head || !head->next) return true;
-
-    struct ListNode *slow = head, *fast = head;
-    while (fast && fast->next) {
-        slow = slow->next;
-        fast = fast->next->next;
-    }
-
-    // Reverse second half
-    struct ListNode *prev = NULL, *curr = slow, *next;
+// Reverse a linked list
+struct ListNode* reverseList(struct ListNode* head) {
+    struct ListNode* prev = NULL;
+    struct ListNode* curr = head;
     while (curr) {
-        next = curr->next;
+        struct ListNode* next = curr->next;
         curr->next = prev;
         prev = curr;
         curr = next;
     }
+    return prev;
+}
 
-    struct ListNode* left = head;
-    struct ListNode* right = prev;
-    while (right) {
-        if (left->val != right->val) return false;
-        left = left->next;
-        right = right->next;
-    }
-    return true;
+// Check if list is palindrome
+bool isPalindrome(struct ListNode* head) {
+   
+    return palindrome;
 }
