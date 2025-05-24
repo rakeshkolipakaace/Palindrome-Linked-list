@@ -54,7 +54,7 @@ void runTest(const vector<int>& input, bool expected) {
 
 // Main
 int main() {
-    runTest({}, true);                    // Empty list (palindrome)
+    runTest({}, true);                   // Empty list (palindrome)
     runTest({1}, true);                  // Single element (palindrome)
     runTest({1, 1}, true);               // Two same (palindrome)
     runTest({1, 2}, true);               // Two different (expecting true now)
