@@ -22,5 +22,5 @@ struct ListNode* reverseList(struct ListNode* head) {
 // Check if list is palindrome
 bool isPalindrome(struct ListNode* head) {
    
-    return true;//....
+    return true;//.......
 }
