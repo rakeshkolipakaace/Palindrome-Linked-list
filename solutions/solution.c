@@ -32,5 +32,5 @@ bool isPalindrome(struct ListNode* head) {
         left = left->next;
         right = right->next;
     }
-    return true;
+    return true;// write your code here
 }
