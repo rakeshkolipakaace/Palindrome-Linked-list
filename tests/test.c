@@ -1,8 +1,9 @@
+// test.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
-// Declare the ListNode and isPalindrome from solution.c
+// Declare ListNode and isPalindrome (defined in solution.c)
 struct ListNode {
     int val;
     struct ListNode* next;
@@ -10,7 +11,7 @@ struct ListNode {
 
 bool isPalindrome(struct ListNode* head);
 
-// Function to create a linked list from an array
+// Build a linked list from an array
 struct ListNode* build_linked_list(int* arr, int size) {
     if (size == 0) return NULL;
 
@@ -29,7 +30,7 @@ struct ListNode* build_linked_list(int* arr, int size) {
     return head;
 }
 
-// Function to free linked list
+// Free a linked list
 void free_list(struct ListNode* head) {
     while (head) {
         struct ListNode* temp = head;
