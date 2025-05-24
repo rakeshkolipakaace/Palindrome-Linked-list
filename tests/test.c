@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include "../solutions/solution.c"  // Include the actual reverseList function
+
 
 // Declare ListNode struct (must be consistent with solution.c)
 struct ListNode {
