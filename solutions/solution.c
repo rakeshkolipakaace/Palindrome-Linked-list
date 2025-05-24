@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-// Definition for singly-linked list
+// Definition for singly-linked list....
 struct ListNode {
     int val;
     struct ListNode *next;
