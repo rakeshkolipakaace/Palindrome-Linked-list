@@ -2,33 +2,28 @@ package solutions;
 
 public class Solution {
     public boolean isPalindrome(ListNode head) {
-        if (head == null || head.next == null) return true;
-
-        // Find middle of the list
-        ListNode slow = head, fast = head;
+          ListNode slow = head, fast = head, prev, temp;
         while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
         }
-
-        // Reverse second half
-        ListNode prev = null;
+        prev = slow;
+        slow = slow.next;
+        prev.next = null;
         while (slow != null) {
-            ListNode next = slow.next;
+            temp = slow.next;
             slow.next = prev;
             prev = slow;
-            slow = next;
+            slow = temp;
         }
-
-        // Compare two halves
-        ListNode left = head;
-        ListNode right = prev;
-        while (right != null) {
-            if (left.val != right.val) return false;
-            left = left.next;
-            right = right.next;
+        fast = head;
+        slow = prev;
+        while (slow != null) {
+            if (fast.val != slow.val) return false;
+            fast = fast.next;
+            slow = slow.next;
         }
-
         return true;
+      
     }
 }
