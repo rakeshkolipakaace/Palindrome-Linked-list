@@ -10,6 +10,6 @@ struct ListNode {
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-       // write your code here
+       // write your code here....
     }
 };
