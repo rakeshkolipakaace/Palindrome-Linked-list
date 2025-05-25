@@ -18,7 +18,6 @@ jobs:
       python: ${{ steps.filter.outputs.python }}
     steps:
       - uses: actions/checkout@v4
-
       - uses: dorny/paths-filter@v3
         id: filter
         with:
@@ -35,36 +34,32 @@ jobs:
             python:
               - 'solutions/solution.py'
               - 'tests/test.py'
-
       - name: Check for return statements in solution files
         run: |
           # Check for 'return' in C solution
           if [ "${{ steps.filter.outputs.c }}" = "true" ]; then
-            if [ -f "solutions/solution.c" ] && ! grep -q "return" "solutions/solution.c"; then
+            if [ -f "solutions/solution.c" ] && ! grep -q "[[:space:]]*return[[:space:]]" "solutions/solution.c"; then
               echo "Error: No return statement found in solutions/solution.c"
               exit 1
             fi
           fi
-
           # Check for 'return' in C++ solution
           if [ "${{ steps.filter.outputs.cpp }}" = "true" ]; then
-            if [ -f "solutions/solution.cpp" ] && ! grep -q "return" "solutions/solution.cpp"; then
+            if [ -f "solutions/solution.cpp" ] && ! grep -q "[[:space:]]*return[[:space:]]" "solutions/solution.cpp"; then
               echo "Error: No return statement found in solutions/solution.cpp"
               exit 1
             fi
           fi
-
           # Check for 'return' in Java solution
           if [ "${{ steps.filter.outputs.java }}" = "true" ]; then
-            if [ -f "solutions/Solution.java" ] && ! grep -q "return" "solutions/Solution.java"; then
+            if [ -f "solutions/Solution.java" ] && ! grep -q "[[:space:]]*return[[:space:]]" "solutions/Solution.java"; then
               echo "Error: No return statement found in solutions/Solution.java"
               exit 1
             fi
           fi
-
           # Check for 'return' in Python solution
           if [ "${{ steps.filter.outputs.python }}" = "true" ]; then
-            if [ -f "solutions/solution.py" ] && ! grep -q "return" "solutions/solution.py"; then
+            if [ -f "solutions/solution.py" ] && ! grep -q "[[:space:]]*return[[:space:]]" "solutions/solution.py"; then
               echo "Error: No return statement found in solutions/solution.py"
               exit 1
             fi
