@@ -1,17 +1,7 @@
-// test.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "../solutions/solution.c"  // Include the actual reverseList function
-
-
-// Declare ListNode and isPalindrome (defined in solution.c)
-struct ListNode {
-    int val;
-    struct ListNode* next;
-};
-
-bool isPalindrome(struct ListNode* head);
+#include "../solutions/solution.c"  // This already defines struct ListNode and isPalindrome
 
 // Build a linked list from an array
 struct ListNode* build_linked_list(int* arr, int size) {
