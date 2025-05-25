@@ -23,6 +23,6 @@ struct ListNode* reverseList(struct ListNode* head) {
 // Check if list is palindrome
 bool isPalindrome(struct ListNode* head) {
    
-// Write your code here
+// Write your code here...
  
 }
