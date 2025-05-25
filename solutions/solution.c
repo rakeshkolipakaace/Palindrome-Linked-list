@@ -7,6 +7,5 @@ struct ListNode {
 
 bool isPalindrome(struct ListNode* head) {
    
-    
-    return false;
+       // write your code here....
 }
