@@ -1,4 +1,7 @@
 // solution.cpp
+#include <iostream>
+using namespace std;
+
 struct ListNode {
     int val;
     ListNode* next;
@@ -10,6 +13,7 @@ struct ListNode {
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
+       
        // write your code here....
     }
 };
