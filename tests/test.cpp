@@ -1,69 +1,93 @@
-import sys
-import os
+// test.cpp
+#include <iostream>
+#include <vector>
+#include <string>
+#include "../solutions/solution.cpp"   // include the solution file here
 
-# Ensure Python finds the 'solutions' folder where solution.py is located
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'solutions')))
+using namespace std;
 
-from solution import Solution, ListNode
+// Helper: Convert vector<int> to linked list
+ListNode* vectorToList(const vector<int>& nums) {
+    ListNode dummy;
+    ListNode* current = &dummy;
+    for (int val : nums) {
+        current->next = new ListNode(val);
+        current = current->next;
+    }
+    return dummy.next;
+}
 
-def build_linked_list(arr):
-    if not arr:
-        return None
-    head = ListNode(arr[0])
-    current = head
-    for val in arr[1:]:
-        current.next = ListNode(val)
-        current = current.next
-    return head
+// Helper: Print vector<int>
+void printVector(const vector<int>& vec) {
+    cout << "[";
+    for (size_t i = 0; i < vec.size(); ++i) {
+        cout << vec[i];
+        if (i < vec.size() - 1) cout << ", ";
+    }
+    cout << "]";
+}
 
-def test_case(arr, expected):
-    head = build_linked_list(arr)
-    sol = Solution()
-    result = sol.isPalindrome(head)
-    print(f"Input: {arr}")
-    print(f"Output: {result}")
-    print(f"Expected: {expected}")
-    if result == expected:
-        print("✅ Test Passed!")
-        return True
-    else:
-        print("❌ Test Failed!")
-        return False
+// Test runner for linked list palindrome
+bool runTestLinkedList(const vector<int>& input, bool expected, const string& description) {
+    Solution sol;
+    ListNode* head = vectorToList(input);
 
-if __name__ == "__main__":
-    test_cases = [
-        ([1,2,2,1], True),
-        ([1,2], False),
-        ([1], True),
-        ([], True),
-        ([1,2,3,2,1], True),
-        ([1,2,3,3,2,1], True),
-        ([1,2,3,4,2,1], False),
+    cout << "Test: " << description << endl;
+    cout << "Input: ";
+    printVector(input);
+    cout << endl;
 
-        # Additional test cases
-        ([1,1,1,1,1], True),            # all same elements
-        ([1,2,3,4,3,2,1], True),        # odd length palindrome
-        ([1,2,3,4,5,2,1], False),       # odd length non-palindrome
-        ([1,0,1], True),                # palindrome with zero
-        ([1,0,0,1], True),              # even length palindrome with zeros
-        ([1,2,3,4,5,6,7,8,9,10], False), # strictly increasing, not palindrome
-        ([1,2,3,4,3,2,2], False),       # almost palindrome but last element breaks it
-        ([9,9,9,9,9,9,9,9], True),     # even length all same digits
-        ([1,2,3,2,1,0], False),         # palindrome + extra element at end
-        ([0], True),                    # single zero element
-    ]
+    bool result = sol.isPalindrome(head);
 
-    passed = 0
-    failed = 0
+    cout << "Output: " << (result ? "true" : "false") << endl;
+    cout << "Expected: " << (expected ? "true" : "false") << endl;
 
-    for arr, expected in test_cases:
-        if test_case(arr, expected):
-            passed += 1
-        else:
-            failed += 1
-        print("-" * 40)
+    bool passed = (result == expected);
+    if (passed) {
+        cout << "Result: PASSED ✅" << endl;
+    } else {
+        cout << "Result: FAILED ❌" << endl;
+    }
+    cout << "--------------------------" << endl;
 
-    print(f"\nSummary:")
-    print(f"Total Test Cases: {len(test_cases)}")
-    print(f"Passed: {passed}")
-    print(f"Failed: {failed}")
+    // Cleanup linked list
+    while (head) {
+        ListNode* temp = head;
+        head = head->next;
+        delete temp;
+    }
+
+    return passed;
+}
+
+int main() {
+    cout << "Running Palindrome Test Cases (Linked List)...\n\n";
+
+    int passedCount = 0;
+    int failedCount = 0;
+
+    // Run tests and count passed/failed
+    if (runTestLinkedList({1, 2, 2, 1}, true, "Even-length palindrome")) passedCount++; else failedCount++;
+    if (runTestLinkedList({1, 2}, false, "Not a palindrome")) passedCount++; else failedCount++;
+    if (runTestLinkedList({1}, true, "Single element")) passedCount++; else failedCount++;
+    if (runTestLinkedList({}, true, "Empty list")) passedCount++; else failedCount++;
+    if (runTestLinkedList({1, 2, 3, 2, 1}, true, "Odd-length palindrome")) passedCount++; else failedCount++;
+    if (runTestLinkedList({1, 2, 3, 3, 2, 1}, true, "Even-length symmetric")) passedCount++; else failedCount++;
+    if (runTestLinkedList({1, 2, 3, 4, 2, 1}, false, "Near-palindrome")) passedCount++; else failedCount++;
+    if (runTestLinkedList({1, 1, 1, 1, 1}, true, "All elements same")) passedCount++; else failedCount++;
+    if (runTestLinkedList({1, 2, 3, 4, 3, 2, 1}, true, "Symmetric complex")) passedCount++; else failedCount++;
+    if (runTestLinkedList({1, 2, 3, 4, 5, 2, 1}, false, "Non-palindrome pattern")) passedCount++; else failedCount++;
+    if (runTestLinkedList({1, 0, 1}, true, "Palindrome with zero")) passedCount++; else failedCount++;
+    if (runTestLinkedList({1, 0, 0, 1}, true, "Even-length with zeros")) passedCount++; else failedCount++;
+    if (runTestLinkedList({1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, false, "Sequential numbers")) passedCount++; else failedCount++;
+    if (runTestLinkedList({1, 2, 3, 4, 3, 2, 2}, false, "Last mismatch")) passedCount++; else failedCount++;
+    if (runTestLinkedList({9, 9, 9, 9, 9, 9, 9, 9}, true, "All 9s")) passedCount++; else failedCount++;
+    if (runTestLinkedList({1, 2, 3, 2, 1, 0}, false, "Correct prefix but fails at end")) passedCount++; else failedCount++;
+    if (runTestLinkedList({0}, true, "Single zero")) passedCount++; else failedCount++;
+
+    cout << "\n✅ All test cases finished!" << endl;
+    cout << "Passed: " << passedCount << endl;
+    cout << "Failed: " << failedCount << endl;
+
+    return 0;
+}
